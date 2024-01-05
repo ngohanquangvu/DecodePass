@@ -1,0 +1,43 @@
+a = open("dcode-DP.txt", "r", encoding="utf-8").readlines()
+
+list_pass = []
+
+for i in a:
+    list_pass.append(i.strip("\n"))
+
+for i in list_pass:
+    kitu = i.split("|")[0]
+    mahoa = i.split("|")[1].split(" ")
+
+while True:
+    pss = input("Nhập pass bị mã hóa: ")
+    pss = pss+" "
+    tach_pass = []
+
+    s=""
+    for i in pss:
+        if len(s)==2:
+            tach_pass.append(s)
+            s=""
+            s+=i
+        else:
+            s+=i
+    mk = ""
+    list_mahoa = []
+    kitu = []
+    for i in list_pass:
+            kitu.append(i.split("|")[0][0])
+            mahoa = i.split("|")[1].split(" ")
+            list_mahoa.append(mahoa)
+    d=0
+    for i in range(len(list_mahoa[0])):
+        for j in range(len(list_mahoa)):
+            try:
+                if list_mahoa[j][i] == tach_pass[d]:
+                    mk+=kitu[j]
+                    break
+            except:pass
+        d+=1
+
+    print("Pass được giải mã là:",mk)
+    print("")
